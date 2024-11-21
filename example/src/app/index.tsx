@@ -25,7 +25,7 @@ export default function HomeScreen() {
     useCallback(() => {
       const listener = ExpoZebraScanner.addListener(event => {
         const { scanData } = event;
-        setBarcodes(_barcodes => [..._barcodes, scanData]);
+        setBarcodes(_barcodes => [scanData, ..._barcodes]);
         // Do something else with barcode
       });
 
@@ -56,7 +56,7 @@ export default function HomeScreen() {
               value={inputData}
               onChangeText={setInputData}
               onSubmitEditing={() => {
-                setBarcodes(_barcodes => [..._barcodes, inputData]);
+                setBarcodes(_barcodes => [inputData, ..._barcodes]);
                 setInputData('');
               }}
               blurOnSubmit={false}

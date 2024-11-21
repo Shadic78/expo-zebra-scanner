@@ -1,4 +1,4 @@
-import { NativeModulesProxy, EventEmitter, Subscription } from 'expo-modules-core';
+import { Subscription } from 'expo-modules-core';
 import ExpoZebraScannerModule from './ExpoZebraScannerModule';
 import { BarcodeEvent } from './ExpoZebraScannerEvent';
 import { BroadcastEvent, BroadcastExtras } from './ExpoZebraBroadcastEvent';
@@ -19,10 +19,8 @@ export function stopScan() {
   return ExpoZebraScannerModule.stopScan();
 }
 
-const emitter = new EventEmitter(ExpoZebraScannerModule ?? NativeModulesProxy.ExpoZebraScanner);
-
 export function addListener(listener: (event: BarcodeEvent) => void): Subscription {
-  return emitter.addListener<any>('onBarcodeScanned', listener);
+  return ExpoZebraScannerModule.addListener('onBarcodeScanned', listener);
 }
 
 export function removeListener(listener: any): void {
